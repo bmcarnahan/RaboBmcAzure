@@ -1,8 +1,6 @@
 #
 # DeployWebsite.ps1
 #
-# Replace the following URL with a public GitHub repo URL
-$gitrepo="https://github.com/bmcarnahan/RaboBmcAzure.git"
 
 #$webappname="mywebapp$(Get-Random)"
 #$location="West Europe"
@@ -17,9 +15,19 @@ $gitrepo="https://github.com/bmcarnahan/RaboBmcAzure.git"
 #New-AzureRmWebApp -Name $webappname -Location $location -AppServicePlan $webappname -ResourceGroupName $webappname
 
 # Configure GitHub deployment from your GitHub repo and deploy once.
+$gitrepo="https://github.com/bmcarnahan/RaboBmcAzure.git"
 $PropertiesObject = @{
     repoUrl = "$gitrepo";
     branch = "master";
     isManualIntegration = "true";
 }
 Set-AzureRmResource -PropertyObject $PropertiesObject -ResourceGroupName RaboBmc532 -ResourceType Microsoft.Web/sites/sourcecontrols -ResourceName RaboBmc532/web -ApiVersion 2015-08-01 -Force
+
+# Add a new web slot
+New-AzureRmWebAppSlot -ResourceGroupName RaboBmc532 -Name RaboBmc532 -Slot development
+
+# Remove an existing web slot
+Remove-AzureRmWebAppSlot -ResourceGroupName RaboBmc532 -Name RaboBmc532 -Slot development
+
+# Switch from the development web slot to the production web slot.
+Switch-AzureRmWebAppSlot -SourceSlotName development -DestinationSlotName production -ResourceGroupName RaboBmc532 -Name RaboBmc532
