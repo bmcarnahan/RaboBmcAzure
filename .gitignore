@@ -50,6 +50,7 @@ _ReSharper.*
 ~$*
 *.licx
 */obj
+packages/
 
 #  Pro Power Tools Document Tab Well Tracking #
 ###############################################
@@ -64,7 +65,5 @@ _ReSharper.*
 ############
 !lib/*.dll
 !lib/*.xml
-!/packages/*/lib/*.dll
-!/packages/*/lib/*/*.dll
 
 applicationhost.config
