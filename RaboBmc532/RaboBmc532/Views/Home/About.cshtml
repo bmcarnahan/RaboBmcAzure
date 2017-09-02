@@ -5,3 +5,16 @@
 <h3>@ViewBag.Message</h3>
 
 <p>Use this area to provide additional information.</p>
+
+<article>
+    <h4>App setting values:</h4>
+    <div><strong>Key AzureKey is only defined in the Azure ApplicationSettings, not the web.config of the web project.</strong></div>
+    <div>The value of the Azure-based setting AzureKey = @Environment.GetEnvironmentVariable("APPSETTING_AzureKey")</div>
+    <div>The value of the Azure-based setting AzureKey using ConfigurationManager.AppSettings = @System.Configuration.ConfigurationManager.AppSettings["AzureKey"]</div><br />
+    <div><strong>Key TestKey is only defined in the web.config of the web project, not in the Azure ApplicationSettings.</strong></div>
+    <div>The value of the Local setting TestKey = @System.Configuration.ConfigurationManager.AppSettings["TestKey"]</div>
+    <div>The value of the Local setting TestKey using Environment.GetEnvironmentVariable = @Environment.GetEnvironmentVariable("APPSETTING_TestKey")</div><br />
+    <div><strong>Key OverriddenKey is defined in both the Azure ApplicationSettings and the web.config of the web project. In the web.config the value is "OverriddenValueLocal"</strong></div>
+    <div>The value of the hybrid setting OverriddenKey using Environment.GetEnvironmentVariable = @Environment.GetEnvironmentVariable("APPSETTING_OverriddenKey")</div>
+    <div>The value of the hybrid setting OverriddenKey using ConfigurationManager.AppSettings = @System.Configuration.ConfigurationManager.AppSettings["OverriddenKey"]</div>
+</article>

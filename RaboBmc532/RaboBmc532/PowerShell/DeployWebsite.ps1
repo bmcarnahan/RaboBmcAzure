@@ -14,6 +14,13 @@
 ## Create a web app.
 #New-AzureRmWebApp -Name $webappname -Location $location -AppServicePlan $webappname -ResourceGroupName $webappname
 
+Select-AzureRmSubscription -SubscriptionName 'Visual Studio Enterprise'
+$appsettings = @{'psKey' = 'psValue'; 'AzureKey' = 'AzureValue'; 'OverriddenKey' = 'OverriddenValueAzure'}
+Set-AzureRmWebAppSlot -ResourceGroupName RaboBmc532 -Name RaboBmc532 -Slot production -AppSettings $appsettings
+# To display the AppSettings for the web app...
+$webapp = Get-AzureRmWebAppSlot -ResourceGroupName RaboBmc532 -Name RaboBmc532 -Slot production
+$webapp.SiteConfig.AppSettings
+
 # Configure GitHub deployment from your GitHub repo and deploy once.
 $gitrepo="https://github.com/bmcarnahan/RaboBmcAzure.git"
 $PropertiesObject = @{
